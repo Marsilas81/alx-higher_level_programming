@@ -1,24 +1,31 @@
-#!/usr/bin/python3
-
-# Converts a Roman numeral to an integer.
 def roman_to_int(roman_string):
-    roman_values = [1, 5, 10, 50, 100, 500, 1000]
-    roman_symbols = 'IVXLCDM'
+    if not isinstance(roman_string, str) or roman_string is None:
+        return 0
 
-    num = 0
+    roman_dict = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    result = 0
     prev_value = 0
 
     for symbol in reversed(roman_string):
-        value = roman_values[roman_symbols.index(symbol)]
+        value = roman_dict[symbol]
         if value < prev_value:
-            num -= value
+            result -= value
         else:
-            num += value
+            result += value
         prev_value = value
 
-    return num
+    return result
 
-
+# Test cases
 if __name__ == "__main__":
     roman_number = "X"
     print("{} = {}".format(roman_number, roman_to_int(roman_number)))
