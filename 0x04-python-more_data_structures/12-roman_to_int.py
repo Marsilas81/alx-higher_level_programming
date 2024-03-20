@@ -12,14 +12,10 @@ def roman_to_int(roman_string):
         'M': 1000,
     }
     num = 0
-
     for i, v in enumerate(roman_string):
         if i < len(roman_string) - 1:
             if roman_dict[v] < roman_dict[roman_string[i + 1]]:
                 num -= roman_dict[v]
             else:
                 num += roman_dict[v]
-        else:
-            num += roman_dict[v]
-
     return num
