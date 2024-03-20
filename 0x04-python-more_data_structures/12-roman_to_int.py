@@ -1,33 +1,36 @@
 #!/usr/bin/python3
-# 12-roman_to_int.py
-# Brennan D Baraban <375@holbertonschool.com>
 
-
+# Converts a Roman numeral to an integer.
 def roman_to_int(roman_string):
-    """Converts a roman numeral to an integer."""
-    if (not isinstance(roman_string, str) or
-            roman_string is None):
-        return (0)
+    roman_values = [1, 5, 10, 50, 100, 500, 1000]
+    roman_symbols = 'IVXLCDM'
 
-    roman_dict = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,
-            "C": 100,
-            "D": 500,
-            "M": 1000
-    }
     num = 0
+    prev_value = 0
 
-    for i in range(len(roman_string)):
-        if roman_dict.get(roman_string[i], 0) == 0:
-            return (0)
-
-        if (i != (len(roman_string) - 1) and
-                roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]):
-                num += roman_dict[roman_string[i]] * -1
-
+    for symbol in reversed(roman_string):
+        value = roman_values[roman_symbols.index(symbol)]
+        if value < prev_value:
+            num -= value
         else:
-            num += roman_dict[roman_string[i]]
-    return (num)
+            num += value
+        prev_value = value
+
+    return num
+
+
+if __name__ == "__main__":
+    roman_number = "X"
+    print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+    roman_number = "VII"
+    print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+    roman_number = "IX"
+    print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+    roman_number = "LXXXVII"
+    print("{} = {}".format(roman_number, roman_to_int(roman_number)))
+
+    roman_number = "DCCVII"
+    print("{} = {}".format(roman_number, roman_to_int(roman_number)))
