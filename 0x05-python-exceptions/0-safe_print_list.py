@@ -1,18 +1,14 @@
 #!/usr/bin/python3
 
-# Define a function named safe_print_list
-# Parameters:
-#   - my_list: The list to print elements from (default value is an empty list)
-#   - x: The number of elements to print (default value is 0)
-# Returns: The real number of elements printed
 
 def safe_print_list(my_list=[], x=0):
-    count = 0
-    for i in range(x):
+    i = 0
+    printed = 0
+    for i in range(0, x):
         try:
-            print("{}".format(my_list[i]), end=" ")
-            count += 1
+            print("{}".format(my_list[i]), end="")
+            printed += 1
         except:
             continue
     print()
-    return count
+    return printed
